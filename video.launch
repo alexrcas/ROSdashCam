@@ -9,7 +9,7 @@
 	<include file="$(find video_stream_opencv)/launch/camera.launch" >
 		<arg name="camera_name" value="videofile" />
 		<!-- Ruta al fichero de vídeo -->
-		<arg name="video_stream_provider" value="/home/alex/catkin_ws/video.mp4" />
+		<arg name="video_stream_provider" value="/video.mp4" />
 		<arg name="fps" value="30" />
 		<arg name="frame_id" value="videofile_frame" />
 		<arg name="camera_info_url" value="" />

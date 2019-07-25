@@ -1,0 +1,36 @@
+<!--
+	Fichero launch del proyecto para automatizar el arranque de los nodos.
+	¡Ojo! Recordar hacer source de devel/setup.bash o los paquetes personalizados
+	no funcionarán.
+-->
+<launch>
+
+	<!-- Lanzar el nodo que hace streaming del vídeo-->
+	<include file="$(find video_stream_opencv)/launch/camera.launch" >
+		<arg name="camera_name" value="videofile" />
+		<!-- Ruta al fichero de vídeo -->
+		<arg name="video_stream_provider" value="/home/alex/catkin_ws/video.mp4" />
+		<arg name="fps" value="30" />
+		<arg name="frame_id" value="videofile_frame" />
+		<arg name="camera_info_url" value="" />
+		<arg name="flip_horizontal" value="false" />
+		<arg name="flip_vertical" value="false" />
+		<arg name="visualize" value="false" />
+	</include>
+
+	<!-- Lanzar el nodo de OpenCV. Ahora mismo sin uso. Cualquier código de visión va dentro de este nodo-->
+	<node pkg="bridge" type="bridge.py" name="opencv_bridge" output="screen">
+		<remap from="image" to="/videofile/image_raw" />
+	</node>
+
+	<!-- Lanzar el nodo que detecta los objetos-->
+	<node pkg="tensorflow_object_detector" type="detect_ros.py" name="tensorflow_object_detector" output="screen">
+            <remap from="image" to ="opencv_bridge_output" />
+	</node>
+
+	<!-- Lanzar el nodo que visualiza la salida en una ventana-->
+	<node pkg="image_view" type="image_view" name="image_view" output="screen">
+		<remap from="image" to="/result"/>
+	</node>
+
+</launch>

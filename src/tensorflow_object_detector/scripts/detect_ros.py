@@ -128,8 +128,8 @@ class Detector:
         # y las lineas.
         # Lo que me resulta atractivo de esto es que el punto fuerte de ROS es la separacion de procesos, de forma que si uno cae el otro no.
         # Como esta planteado ahora mismo el sistema, en forma de pipeline, esto no se aprovecha y si un nodo cae, caen todos.
-        # Seria una implementacion modular muy atractiva. En la exposicion podrian apagarse y levantar nodos mostrando como el sistema continua
-        # Si la cosa es mas complicada de lo que parece, se elimina esta funcion y las lineas 106-115 y a otra cosa.
+        # Seria una implementacion modular muy atractiva. En la exposicion podrian apagarse y levantar nodos mostrando como el sistema continua funcionando y se recupera
+        # Si la cosa es mas complicada de lo que parece o los tiros no van por aqui, se elimina esta funcion y las lineas 106-115 y a otra cosa.
         
     def object_predict(self, object_data, header, npArrayImage, image):
         image_height, image_width, channels = image.shape

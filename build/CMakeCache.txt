@@ -274,6 +274,15 @@ cpp_common_DIR:PATH=/opt/ros/lunar/share/cpp_common/cmake
 //The directory containing a CMake configuration file for cv_bridge.
 cv_bridge_DIR:PATH=/opt/ros/lunar/share/cv_bridge/cmake
 
+//The directory containing a CMake configuration file for cv_bridgesensor_msgs.
+cv_bridgesensor_msgs_DIR:PATH=cv_bridgesensor_msgs_DIR-NOTFOUND
+
+//Value Computed by CMake
+detector_BINARY_DIR:STATIC=/home/alex/catkin_ws/build/detector
+
+//Value Computed by CMake
+detector_SOURCE_DIR:STATIC=/home/alex/catkin_ws/src/detector
+
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/lunar/share/gencpp/cmake
 
@@ -378,6 +387,12 @@ tensorflow_detector_BINARY_DIR:STATIC=/home/alex/catkin_ws/build/tensorflow_dete
 tensorflow_detector_SOURCE_DIR:STATIC=/home/alex/catkin_ws/src/tensorflow_detector
 
 //Value Computed by CMake
+tensorflow_detector_only_BINARY_DIR:STATIC=/home/alex/catkin_ws/build/tensorflow_detector_only
+
+//Value Computed by CMake
+tensorflow_detector_only_SOURCE_DIR:STATIC=/home/alex/catkin_ws/src/tensorflow_detector_only
+
+//Value Computed by CMake
 tensorflow_object_detector_BINARY_DIR:STATIC=/home/alex/catkin_ws/build/tensorflow_object_detector
 
 //Value Computed by CMake
@@ -391,6 +406,12 @@ vision_msgs_DIR:PATH=/home/alex/catkin_ws/devel/share/vision_msgs/cmake
 
 //Value Computed by CMake
 vision_msgs_SOURCE_DIR:STATIC=/home/alex/catkin_ws/src/vision_msgs
+
+//Value Computed by CMake
+visualizer_BINARY_DIR:STATIC=/home/alex/catkin_ws/build/visualizer
+
+//Value Computed by CMake
+visualizer_SOURCE_DIR:STATIC=/home/alex/catkin_ws/src/visualizer
 
 
 ########################
@@ -494,7 +515,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

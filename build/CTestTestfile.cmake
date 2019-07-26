@@ -6,6 +6,6 @@
 # testing this directory and lists subdirectories to be tested as well.
 subdirs(gtest)
 subdirs(bridge)
-subdirs(tensorflow_detector)
-subdirs(vision_msgs)
+subdirs(detector)
 subdirs(tensorflow_object_detector)
+subdirs(visualizer)

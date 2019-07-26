@@ -1,0 +1,35 @@
+<!--
+	Fichero launch del proyecto para automatizar el arranque de los nodos.
+	¡Ojo! Recordar hacer source de devel/setup.bash o los paquetes personalizados
+	no funcionarán.
+-->
+<launch>
+
+	<!-- Lanzar el nodo que hace streaming del vídeo-->
+	<include file="$(find video_stream_opencv)/launch/camera.launch" >
+		<arg name="camera_name" value="videofile" />
+		<!-- Ruta al fichero de vídeo -->
+		<arg name="video_stream_provider" value="/home/alex/catkin_ws/video.mp4" />
+		<arg name="fps" value="30" />
+		<arg name="frame_id" value="videofile_frame" />
+		<arg name="camera_info_url" value="" />
+		<arg name="flip_horizontal" value="false" />
+		<arg name="flip_vertical" value="false" />
+		<arg name="visualize" value="false" />
+	</include>
+
+	<!-- Lanzar el nodo que detecta los objetos-->
+	<node pkg="detector" type="detector.py" name="detector" output="screen">
+            <remap from="image" to ="/videofile/image_raw" />
+	</node>
+	
+	<node pkg="visualizer" type="display.py" name="viualizer" output="screen">
+            <remap from="image" to="/videofile/image_raw" />
+	</node>
+
+	<!-- Lanzar el nodo que visualiza la salida en una ventana-->
+	<node pkg="image_view" type="image_view" name="image_view" output="screen">
+		<remap from="image" to="/visualizer_output"/>
+	</node>
+
+</launch>

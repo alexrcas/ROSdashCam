@@ -25,6 +25,7 @@
 	
 	<node pkg="visualizer" type="display.py" name="viualizer" output="screen">
             <remap from="image" to="/videofile/image_raw" />
+            <remap from="boxes" to="/objects" />
 	</node>
 
 	<!-- Lanzar el nodo que visualiza la salida en una ventana-->

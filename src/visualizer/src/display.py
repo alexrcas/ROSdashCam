@@ -34,7 +34,7 @@ class image_converter:
         # Se supone que aqui recibimos el Detection2DArray, que esta compuesto de objetos Object2D para pintarlos
         # He probado un par de cosas pero no funciona del todo, obtengo tipos de datos raros, obtengo excepciones...
         # imagino que los tiros deberian ir por algo asi
-        Detection2DArray(self.boxes_sub)
+        objectsArray =  Detection2DArray(self.boxes_sub)
         # Recorremos el array y para cada objeto obtenemos su propiedad center y size y lo pintamos mediante openCV o lo que sea
         # ...
         

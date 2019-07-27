@@ -13,7 +13,7 @@ estos nuevos nodos. El flujo funciona pero el nodo visualizer no pinta las cajit
 Tengo algunas dudas con el tema de los mensajes. Ver el código fuente del nodo visualizer.
 
 ## De cara al futuro
-Dejo apuntado esto a modo de idea para no olvidarme
+Dejo apuntado esto a modo de idea para no olvidarme.
 El nodo visualizer en realidad sería nuestro HUD, ya que cualquier cosa se pintará ahí.
 He visto que en ROS hay un paquete llamado **bond** (no sé si será exactamente lo que busco) que sirve para monitorizar nodos, si no he entendido mal. Me gustaría pintar en pantalla entre otras cosas, los nodos en ejecución y su estado, es decir, que se vea en una esquina algo como
 *DETECTOR DE PERSONAS [OK]*

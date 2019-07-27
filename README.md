@@ -16,7 +16,7 @@ Tengo algunas dudas con el tema de los mensajes. Ver el código fuente del nodo 
 Dejo apuntado esto a modo de idea para no olvidarme.
 El nodo visualizer en realidad sería nuestro HUD, ya que cualquier cosa se pintará ahí.
 He visto que en ROS hay un paquete llamado **bond** (no sé si será exactamente lo que busco) que sirve para monitorizar nodos, si no he entendido mal. Me gustaría pintar en pantalla entre otras cosas, los nodos en ejecución y su estado, es decir, que se vea en una esquina algo como
-*DETECTOR DE PERSONAS [OK]*
-*DETECTOR DE CARRIL [OK]*
-*DETECTOR DE GATITOS [CAÍDO(RECUPERANDO)]*
+- *DETECTOR DE PERSONAS [RUNNING]*
+- *DETECTOR DE CARRIL [RUNNING]*
+- *DETECTOR DE GATITOS [CAÍDO(RECUPERANDO)]*
 Podría emitirse un aviso en rojo cuando un nodo cayese, o algo así.

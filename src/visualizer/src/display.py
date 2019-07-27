@@ -14,7 +14,6 @@ import math
 from vision_msgs.msg import Detection2D, Detection2DArray, ObjectHypothesisWithPose
 
 
-
 class image_converter:
 
     def __init__(self):
@@ -39,16 +38,17 @@ class image_converter:
     '''
     Aquí me han surgido varios problemas. El primero es que esta es la única forma en que he podido obtener el mensaje
     de ROS, es decir, pasándolo como argumento en el callback del subscriber.
-    Intenté hacer dentro de la función callback de arriba algo como:
+    Intenté hacer dentro de la función callback de arriba cosas como:
     objectArray = Detection2DArray(self.boxes_sub)
     intenté varias combinaciones sin éxito.
     El problema que me plantea tener esto así ahora mismo es que necesito la imagen para pintarle las cajitas y ahora
     mismo las variables tienen scopes distintos, y al no ser funciones normales sino cosas "raras" de ROS no sé exactamente
-    cuál sería la forma de hacerlo.
+    cuál sería la forma de hacerlo. He intentado varios caminos o cosas pero obtengo errores.
     
     Otro problema, es que dado el objeto Detection2D, tiene una serie de propiedades como las que obtengo aquí debajo
     y que parecen bastante intuitivas. Sin embargo, el atributo scores, que representa el nivel de confianza de la predicción
-    es un array (ver vision_msgs) y no entiendo por qué.
+    es un array (ver vision_msgs) y no entiendo por qué. Otra cuestión es que juraría que no he localizado la etiqueta
+    que dice qué tipo de objeto es. Sé que el mensaje tiene forma de JSON, no recuerdo ahora si la vi o no.
     Supongo que se me están escapando algunas cosillas pero ¿iría por buen camino para terminar pintando las cajitas?
     '''
     def drawBoxes(self, array):

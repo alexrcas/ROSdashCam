@@ -118,7 +118,10 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/alex/catkin_ws/build/gtest/cmake_install.cmake")
   include("/home/alex/catkin_ws/build/bridge/cmake_install.cmake")
+  include("/home/alex/catkin_ws/build/bridge_modular/cmake_install.cmake")
   include("/home/alex/catkin_ws/build/detector/cmake_install.cmake")
+  include("/home/alex/catkin_ws/build/lane-net-detector/cmake_install.cmake")
+  include("/home/alex/catkin_ws/build/LaneNetRos/cmake_install.cmake")
   include("/home/alex/catkin_ws/build/tensorflow_object_detector/cmake_install.cmake")
   include("/home/alex/catkin_ws/build/visualizer/cmake_install.cmake")
 

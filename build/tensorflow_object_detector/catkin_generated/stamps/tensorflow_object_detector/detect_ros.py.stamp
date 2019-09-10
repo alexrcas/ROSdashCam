@@ -17,7 +17,7 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 # Definicion y configuracion del modelo, grafo, ficheros de etiquetas, etc
-MODEL_NAME =  'ssd_mobilenet_v1_coco_2018_01_28'
+MODEL_NAME =  'ssd_mobilenet_v1_coco_11_06_2017'
 MODEL_PATH = os.path.join(os.path.dirname(sys.path[0]),'data','models' , MODEL_NAME)
 GRAPH_PATH = MODEL_PATH + '/frozen_inference_graph.pb'
 LABEL_NAME = 'mscoco_label_map.pbtxt'
@@ -89,6 +89,7 @@ class Detector:
         # Hay que modificar el fichero visualization_utils, la propiedad font-size, pero justo en Ubuntu 16.04 ocurre un problema
         # y es que la fuente utilizada no esta en el sistema (pero no se puede usar otra).
         # No obstante, hay soluciones y parecen muy, muy sencillas. Debo probarlo.
+        
         objects = vis_util.visualize_boxes_and_labels_on_image_array(
             image,
             np.squeeze(boxes),

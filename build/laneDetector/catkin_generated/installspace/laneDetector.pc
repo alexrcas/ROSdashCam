@@ -1,0 +1,8 @@
+prefix=/home/alex/catkin_ws/install
+
+Name: laneDetector
+Description: Description of laneDetector
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/alex/catkin_ws/install/lib 
+Requires: 

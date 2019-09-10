@@ -1,0 +1,8 @@
+prefix=/home/alex/catkin_ws/devel
+
+Name: lane-net-detector
+Description: Description of lane-net-detector
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/alex/catkin_ws/devel/lib 
+Requires: 

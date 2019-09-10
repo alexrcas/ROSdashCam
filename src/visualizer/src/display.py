@@ -7,11 +7,13 @@ import sys
 import rospy
 import cv2
 from std_msgs.msg import String, Header
+from std_msgs.msg import Int32MultiArray
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
 import math
 from vision_msgs.msg import Detection2D, Detection2DArray, ObjectHypothesisWithPose
+
 
 
 class image_converter:
@@ -21,43 +23,63 @@ class image_converter:
 
         self.bridge = CvBridge()
         self.image_sub = rospy.Subscriber("image", Image, self.callback)
+        self.lanes_sub = rospy.Subscriber("lanes", Int32MultiArray, self.drawLanes)
         
         self.boxes_sub = rospy.Subscriber("boxes", Detection2DArray, self.drawBoxes, queue_size = 1)
+        self.detection = ''
+        self.laneData = ''
 
     def callback(self,data):
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            if self.detection:
+
+                print(self.detection.detections.classes)
         except CvBridgeError as e:
             print(e)
+            
+        if self.laneData != None:
+            self.draw_lines(cv_image, self.laneData.data)
         
         try:
             self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
         except CvBridgeError as e:
             print(e)
 
-    '''
-    Aquí me han surgido varios problemas. El primero es que esta es la única forma en que he podido obtener el mensaje
-    de ROS, es decir, pasándolo como argumento en el callback del subscriber.
-    Intenté hacer dentro de la función callback de arriba cosas como:
-    objectArray = Detection2DArray(self.boxes_sub)
-    intenté varias combinaciones sin éxito.
-    El problema que me plantea tener esto así ahora mismo es que necesito la imagen para pintarle las cajitas y ahora
-    mismo las variables tienen scopes distintos, y al no ser funciones normales sino cosas "raras" de ROS no sé exactamente
-    cuál sería la forma de hacerlo. He intentado varios caminos o cosas pero obtengo errores.
-    
-    Otro problema, es que dado el objeto Detection2D, tiene una serie de propiedades como las que obtengo aquí debajo
-    y que parecen bastante intuitivas. Sin embargo, el atributo scores, que representa el nivel de confianza de la predicción
-    es un array (ver vision_msgs) y no entiendo por qué. Otra cuestión es que juraría que no he localizado la etiqueta
-    que dice qué tipo de objeto es. Sé que el mensaje tiene forma de JSON, no recuerdo ahora si la vi o no.
-    Supongo que se me están escapando algunas cosillas pero ¿iría por buen camino para terminar pintando las cajitas?
-    '''
+
     def drawBoxes(self, array):
         for i in range(len(array.detections)):
+            '''
             detectionObject = array.detections[i]
             bbox = detectionObject.bbox
             center = bbox.center
             print("Dibujar caja en: ", center.x, center.y)
             print("de dimensiones: ", bbox.size_x, bbox.size_y)
+            self.detection = detectionObject
+            '''
+        self.detection = array
+        
+    def drawLanes(self, data):
+        self.laneData = data
+ 
+        
+    def draw_lines(self, img, lines, color=[255, 0, 0], thickness=3):
+        if lines is None:
+            return
+        img = np.copy(img)
+        line_img = np.zeros(
+            (
+                img.shape[0],
+                img.shape[1],
+                3
+            ),
+            dtype=np.uint8,
+        )
+        for line in lines:
+            for x1, y1, x2, y2 in line:
+                cv2.line(line_img, (x1, y1), (x2, y2), color, thickness)
+        img = cv2.addWeighted(img, 0.8, line_img, 1.0, 0.0)
+        return img
     
 
 def main(args):

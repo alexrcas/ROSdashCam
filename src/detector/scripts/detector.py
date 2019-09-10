@@ -78,10 +78,8 @@ class Detector:
         # Obtenemos la clase que tambien sera mostrada junto con el score
         classes = detection_graph.get_tensor_by_name('detection_classes:0')
         num_detections = detection_graph.get_tensor_by_name('num_detections:0')
-        print("Detectando2!")
-        
-        # Algunas de las siguientes lineas no termino de entenderlas muy bien pero funcionan. Debo estudiarlas y comprenderlas a fondo
-        # de cara a la presentacion del proyecto y la redaccion de la memoria
+        print("Detectando3!")
+
         (boxes, scores, classes, num_detections) = self.sess.run([boxes, scores, classes, num_detections], feed_dict = {image_tensor: npArrayImageExpanded})
 
         # Nota: averiguar como hacer el texto mas grande porque ahora mismo practicamente no se lee.
@@ -96,6 +94,7 @@ class Detector:
             categoryIndex,
             use_normalized_coordinates = True,
             line_thickness=2)
+        self.try_pub.publish(objects)
 
         # NOTA: esto podria ser interesante. Leer el comentario largo en la funcion object_predict mas abajo.
         objectArray.detections = []
@@ -106,7 +105,6 @@ class Detector:
             object_count += 1
             objectArray.detections.append(self.object_predict(objects[i], data.header, npArrayImage, cv_image))
 
-        self.object_pub.publish(objectArray)
 
         # Esta funcion almacena toda la informacion relativa al objeto detectado y es publicada como topico (linea 115)
         # La encontre en un codigo fuente cuando me documentaba y veia ejemplos.

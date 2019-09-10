@@ -17,7 +17,7 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 # Definicion y configuracion del modelo, grafo, ficheros de etiquetas, etc
-MODEL_NAME =  'ssd_mobilenet_v1_coco_2018_01_28'
+MODEL_NAME =  'ssd_mobilenet_v1_coco_11_06_2017'
 MODEL_PATH = os.path.join(os.path.dirname(sys.path[0]),'data','models' , MODEL_NAME)
 GRAPH_PATH = MODEL_PATH + '/frozen_inference_graph.pb'
 LABEL_NAME = 'mscoco_label_map.pbtxt'
@@ -80,15 +80,14 @@ class Detector:
         classes = detection_graph.get_tensor_by_name('detection_classes:0')
         num_detections = detection_graph.get_tensor_by_name('num_detections:0')
         print("Detectando!")
-        
-        # Algunas de las siguientes lineas no termino de entenderlas muy bien pero funcionan. Debo estudiarlas y comprenderlas a fondo
-        # de cara a la presentacion del proyecto y la redaccion de la memoria
+ 
         (boxes, scores, classes, num_detections) = self.sess.run([boxes, scores, classes, num_detections], feed_dict = {image_tensor: npArrayImageExpanded})
 
         # Nota: averiguar como hacer el texto mas grande porque ahora mismo practicamente no se lee.
         # Hay que modificar el fichero visualization_utils, la propiedad font-size, pero justo en Ubuntu 16.04 ocurre un problema
         # y es que la fuente utilizada no esta en el sistema (pero no se puede usar otra).
         # No obstante, hay soluciones y parecen muy, muy sencillas. Debo probarlo.
+        
         objects = vis_util.visualize_boxes_and_labels_on_image_array(
             image,
             np.squeeze(boxes),

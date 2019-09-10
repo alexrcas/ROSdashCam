@@ -19,13 +19,18 @@
 	</include>
 
 	<!-- Lanzar el nodo que detecta los objetos-->
-	<node pkg="detector" type="detector.py" name="detector" output="screen">
+        <node pkg="detector" type="detector.py" name="detector" output="screen">
             <remap from="image" to ="/videofile/image_raw" />
 	</node>
 	
-	<node pkg="visualizer" type="display.py" name="viualizer" output="screen">
+	<node pkg="bridge_modular" type="bridge.py" name="bridge_modular" output="screen">
+            <remap from="image" to ="/videofile/image_raw" />
+	</node>
+	
+	<node pkg="visualizer" type="display.py" name="visualizer" output="screen">
             <remap from="image" to="/videofile/image_raw" />
             <remap from="boxes" to="/objects" />
+            <remap from="lanes" to="/road_lanes" />
 	</node>
 
 	<!-- Lanzar el nodo que visualiza la salida en una ventana-->

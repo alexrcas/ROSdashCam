@@ -1,0 +1,8 @@
+prefix=/home/alex/catkin_ws/install
+
+Name: bridge_modular
+Description: Description of bridge_modular
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/alex/catkin_ws/install/lib 
+Requires: 

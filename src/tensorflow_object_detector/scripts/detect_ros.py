@@ -68,8 +68,7 @@ class Detector:
         # Representamos y guardamos la imagen como un array. Se usara mas tarde para presentar el resultado
         # con las cajas y etiquetas
         npArrayImage = np.asarray(image)
-        # Cosas de numpy. El modelo necesita que el array tenga shape: [1, None, None, 3]
-        # Repasar todo el tema de los shapes de numpy
+
         npArrayImageExpanded = np.expand_dims(npArrayImage, axis = 0)
         image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
         # Cada caja representa una seccion de la imagen donde un objeto fue detectado
@@ -83,11 +82,6 @@ class Detector:
  
         (boxes, scores, classes, num_detections) = self.sess.run([boxes, scores, classes, num_detections], feed_dict = {image_tensor: npArrayImageExpanded})
 
-        # Nota: averiguar como hacer el texto mas grande porque ahora mismo practicamente no se lee.
-        # Hay que modificar el fichero visualization_utils, la propiedad font-size, pero justo en Ubuntu 16.04 ocurre un problema
-        # y es que la fuente utilizada no esta en el sistema (pero no se puede usar otra).
-        # No obstante, hay soluciones y parecen muy, muy sencillas. Debo probarlo.
-        
         objects = vis_util.visualize_boxes_and_labels_on_image_array(
             image,
             np.squeeze(boxes),
@@ -118,18 +112,7 @@ class Detector:
         image_out.header = data.header
         self.image_pub.publish(image_out)
 
-        # Esta funcion almacena toda la informacion relativa al objeto detectado y es publicada como topico (linea 115)
-        # La encontre en un codigo fuente cuando me documentaba y veia ejemplos.
-        # Si es correcto, podria ser la forma de separar la deteccion de la visualizacion. En este nodo no se visualizaria nada
-        # sino que simplemente publicaria las "cajas".
-        # Podria hacer algo parecido con la deteccion de carril y publicar solamente las lineas (o los puntos de las mismas para trazarlas, no se como funcionara)
-        # Otro nodo si que mostraria el video y estaria suscrito a este nodo y al de deteccion de carril. Obteniendo y pintando las cajas
-        # y las lineas.
-        # Lo que me resulta atractivo de esto es que el punto fuerte de ROS es la separacion de procesos, de forma que si uno cae el otro no.
-        # Como esta planteado ahora mismo el sistema, en forma de pipeline, esto no se aprovecha y si un nodo cae, caen todos.
-        # Seria una implementacion modular muy atractiva. En la exposicion podrian apagarse y levantar nodos mostrando como el sistema continua funcionando y se recupera
-        # Si la cosa es mas complicada de lo que parece o los tiros no van por aqui, se elimina esta funcion y las lineas 106-115 y a otra cosa.
-        
+
     def object_predict(self, object_data, header, npArrayImage, image):
         image_height, image_width, channels = image.shape
         obj=Detection2D()
